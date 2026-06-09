@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromoBuilder - Guidelines Manager</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blue: #0F7EA8;
+      --blue-bg: #e5f3f9;
+      --blue-dark: #0c6789;
+      --blue-light: #e3f1f7;
+      --blue-nav: #1689b3;
+      --grey-bg: #f4f5f7;
+      --grey-header: #ededed;
+      --grey-border: #e0e0e0;
+      --grey-line: #eaeaea;
+      --text: #2b2b2b;
+      --text-soft: #6b6b6b;
+      --text-light: #9a9a9a;
+      --green: #2e8540;
+      --green-bg: #e6f4ea;
+      --yellow: #b7791f;
+      --yellow-bg: #fdf3d8;
+      --red: #c0392b;
+    }
+
+    body {
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #d9dde2;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.4;
+      padding: 24px;
+    }
+
+    .screen-nav {
+      max-width: 1280px;
+      margin: 0 auto 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    }
+
+    .screen-nav button {
+      border: 1px solid var(--grey-border);
+      background: #fff;
+      padding: 7px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12.5px;
+      color: var(--text-soft);
+      transition: all .15s;
+    }
+
+    .screen-nav button:hover {
+      background: var(--grey-bg);
+    }
+
+    .screen-nav button.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    /* Browser frame */
+    .window {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: #1c1c1e;
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+      overflow: hidden;
+    }
+
+    .titlebar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot.r {
+      background: #ff5f57;
+    }
+
+    .dot.y {
+      background: #febc2e;
+    }
+
+    .dot.g {
+      background: #28c840;
+    }
+
+    .urlbar {
+      background: #2c2c2e;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 12px;
+    }
+
+    .urlbar .nav-ico {
+      color: #999;
+      font-size: 15px;
+    }
+
+    .url {
+      flex: 1;
+      background: #1c1c1e;
+      border-radius: 6px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      color: #c7c7c7;
+      font-size: 12px;
+    }
+
+    .url b {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* App shell */
+    .app {
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 720px;
+    }
+
+    .topbar {
+      height: 58px;
+      border-bottom: 1px solid var(--grey-border);
+      display: flex;
+      align-items: center;
+      padding: 0 22px;
+      background: #fafafa;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .3px;
+    }
+
+    .logo-text span {
+      font-weight: 400;
+      color: var(--text-soft);
+    }
+
+    .tenant {
+      margin-left: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .tenant .chev {
+      color: var(--text-light);
+    }
+
+    .crumb-top {
+      margin-left: 22px;
+      color: var(--text-light);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .crumb-top b {
+      color: var(--text);
+    }
+
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+
+    .topbar-right .item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .topbar-right .user {
+      color: var(--blue);
+    }
+
+    .topbar-right .lang {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .topbar-right .lang span {
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .bell {
+      position: relative;
+    }
+
+    .bell::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 7px;
+      height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+
+    .main {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 232px;
+      border-right: 1px solid var(--grey-border);
+      background: #fff;
+      padding: 18px 0;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13.5px;
+    }
+
+    .nav-item .ico {
+      width: 18px;
+      text-align: center;
+      opacity: .7;
+    }
+
+    .nav-item .arr {
+      margin-left: auto;
+      color: var(--text-light);
+      font-size: 11px;
+    }
+
+    .nav-item.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .nav-item.active .ico {
+      opacity: 1;
+    }
+
+    .nav-sub {
+      padding: 10px 20px 10px 50px;
+      font-size: 13px;
+      color: var(--text-soft);
+      cursor: pointer;
+    }
+
+    .nav-sub.active {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-weight: 500;
+    }
+
+    .content {
+      flex: 1;
+      padding: 26px 30px;
+      background: #fff;
+    }
+
+    .page-crumb {
+      font-size: 21px;
+      font-weight: 700;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .page-crumb .sep {
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .page-crumb .mut {
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .breadcrumb-line {
+      font-size: 12.5px;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb-line .cur {
+      color: var(--blue-dark);
+      font-weight: 600;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+
+    .btn {
+      border: 1px solid var(--grey-border);
+      background: #fff;
+      border-radius: 6px;
+      padding: 11px 18px;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      background: var(--grey-bg);
+    }
+
+    .btn .plus {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+    }
+
+    .btn-ghost {
+      background: transparent;
+    }
+
+    .search {
+      flex: 1;
+      border: 1px solid var(--grey-border);
+      border-radius: 6px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 10px;
+      color: var(--text-light);
+    }
+
+    .search.sm {
+      height: 36px;
+      max-width: 320px;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: var(--grey-header);
+      text-align: left;
+      padding: 13px 16px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #444;
+      border-bottom: 1px solid var(--grey-border);
+    }
+
+    tbody td {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--grey-line);
+      font-size: 13.5px;
+    }
+
+    tbody tr:hover {
+      background: #fafbfc;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.active {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .badge.draft {
+      background: var(--yellow-bg);
+      color: var(--yellow);
+    }
+
+    .badge.inactive {
+      background: #f0f0f0;
+      color: #888;
+    }
+
+    .kebab {
+      font-size: 18px;
+      color: var(--text-soft);
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+
+    .link {
+      color: var(--blue);
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* Kebab dropdown */
+    .kebab-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown {
+      position: absolute;
+      right: 0;
+      top: 26px;
+      background: #fff;
+      border: 1px solid var(--grey-border);
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
+      min-width: 190px;
+      z-index: 20;
+      overflow: hidden;
+    }
+
+    .dropdown .opt {
+      padding: 12px 16px;
+      font-size: 13.5px;
+      cursor: pointer;
+    }
+
+    .dropdown .opt:hover {
+      background: var(--grey-bg);
+    }
+
+    .dropdown .opt.new {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-weight: 600;
+      border-top: 1px solid var(--grey-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dropdown .opt.new .tag {
+      font-size: 9px;
+      background: var(--blue);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+
+    .dropdown .opt.new:hover {
+      background: #d3e8f1;
+    }
+
+    /* Cards */
+    .card {
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      background: #fff;
+      margin-bottom: 22px;
+    }
+
+    .card-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--grey-line);
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* Upload */
+    .upload-zone {
+      border: 2px dashed var(--blue);
+      border-radius: 12px;
+      background: #f7fbfd;
+      padding: 50px;
+      text-align: center;
+      color: var(--text-soft);
+    }
+
+    .upload-zone .big {
+      font-size: 40px;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    .upload-zone .t1 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .upload-zone .t2 {
+      font-size: 13.5px;
+      margin-bottom: 4px;
+    }
+
+    .upload-zone .formats {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 8px;
+    }
+
+    .file-result {
+      display: flex;
+      gap: 30px;
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--grey-bg);
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+
+    .file-meta {
+      font-size: 13px;
+    }
+
+    .file-meta .lbl {
+      color: var(--text-light);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      margin-bottom: 3px;
+    }
+
+    .file-meta .val {
+      font-weight: 600;
+    }
+
+    .file-meta .val.ok {
+      color: var(--green);
+    }
+
+    .progress {
+      height: 8px;
+      background: #dfe3e6;
+      border-radius: 4px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .progress>div {
+      height: 100%;
+      width: 100%;
+      background: var(--green);
+    }
+
+    /* Filter chips */
+    .chips {
+      display: flex;
+      gap: 9px;
+      margin-bottom: 16px;
+    }
+
+    .chip {
+      padding: 7px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--grey-border);
+      font-size: 12.5px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .chip.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .summary-card {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .summary-card .seg {
+      flex: 1;
+      padding: 18px 22px;
+      border-right: 1px solid var(--grey-line);
+    }
+
+    .summary-card .seg:last-child {
+      border-right: none;
+    }
+
+    .summary-card .num {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .summary-card .cap {
+      font-size: 12.5px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--blue);
+      background: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .remove {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(#fff);
+      background: var(#fff);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    /* 3 panel editor */
+    .editor {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      overflow: hidden;
+      min-height: 540px;
+    }
+
+    .panel {
+      border-right: 1px solid var(--grey-border);
+    }
+
+    .panel:last-child {
+      border-right: none;
+    }
+
+    .panel-l {
+      width: 240px;
+      background: #fafafa;
+    }
+
+    .panel-c {
+      flex: 1;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-r {
+      width: 320px;
+      background: #fafafa;
+    }
+
+    .panel-title {
+      padding: 14px 18px;
+      font-weight: 700;
+      font-size: 13.5px;
+      border-bottom: 1px solid var(--grey-line);
+      background: #fff;
+    }
+
+    .nav-group {
+      padding: 14px 18px;
+    }
+
+    .nav-group .grp-lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--text-light);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .nav-group .leaf {
+      padding: 7px 12px;
+      font-size: 13px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--text-soft);
+    }
+
+    .nav-group .leaf:hover {
+      background: #eef0f2;
+    }
+
+    .nav-group .leaf.sel {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-weight: 600;
+    }
+
+    .nav-group .leaf .vbadge {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+    }
+
+    /* Flyer preview */
+    .preview-body {
+      flex: 1;
+      padding: 24px;
+    }
+
+    .flyer {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      background: #fff;
+      border: 1px solid var(--grey-border);
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 1px #f2f2f2;
+    }
+
+    .flyerPreview {
+      position: relative;
+      width: 40%;
+      height: 340px;
+      background: #fff;
+      border: 1px solid var(--grey-border);
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 1px #f2f2f2;
+    }
+
+    .fl-el {
+      position: absolute;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .fl-image {
+      top: 18px;
+      left: 18px;
+      width: 200px;
+      height: 150px;
+      background: #dde7ef;
+      color: var(--blue-dark);
+      border: 1.5px dashed var(--blue);
+    }
+
+    .fl-copy {
+      bottom: 24px;
+      left: 22px;
+      width: 220px;
+      height: 60px;
+      background: #f0f0f0;
+      color: #777;
+      border: 1.5px dashed #bbb;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-start;
+      padding: 10px;
+    }
+
+    .fl-price {
+      bottom: 24px;
+      right: 22px;
+      width: 120px;
+      height: 80px;
+      background: #fbe9d6;
+      color: #b9651d;
+      border: 1.5px dashed #e08a3d;
+      font-size: 14px;
+    }
+
+    .fl-logo {
+      top: 18px;
+      right: 18px;
+      width: 110px;
+      height: 44px;
+      background: #e8e8e8;
+      color: #888;
+      border: 1.5px dashed #bbb;
+    }
+
+    .validation-bar {
+      padding: 13px 24px;
+      border-top: 1px solid var(--grey-line);
+      background: var(--green-bg);
+      color: var(--green);
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Rules */
+    .rules-body {
+      padding: 18px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .selectbox {
+      width: 100%;
+      border: 1px solid var(--grey-border);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-size: 13px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .selectbox .cv {
+      color: var(--text-light);
+    }
+
+    .chk-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 5px 0;
+      font-size: 13px;
+    }
+
+    .chk {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--grey-border);
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chk.on {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      font-size: 11px;
+    }
+
+    .selected-el {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      background: var(--blue-light);
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .yaml {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-top: 10px;
+    }
+
+    .yaml .k {
+      color: #89b4fa;
+    }
+
+    .yaml .v {
+      color: #a6e3a1;
+    }
+
+    .yaml .n {
+      color: #fab387;
+    }
+
+    .rules-foot {
+      display: flex;
+      gap: 10px;
+      padding: 16px 18px;
+      border-top: 1px solid var(--grey-line);
+    }
+
+    /* Validation screen */
+    .vbanner {
+      background: #fafafa;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+
+    .vbanner2 {
+      background: #fafafa;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .vbanner2 .vt {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    .vcheck-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      font-size: 14px;
+      border-bottom: 1px solid var(--grey-line);
+    }
+
+    .vcheck-item:last-child {
+      border-bottom: none;
+    }
+
+    .vc-ico {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .vc-ico.ok {
+      background: var(--green);
+    }
+
+    .vc-ico.warn {
+      background: #e0a93a;
+    }
+
+    .two-col {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .two-col .left {
+      flex: 1;
+    }
+
+    .two-col .right {
+      width: 300px;
+    }
+
+    .score-card {
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .score-num {
+      font-size: 46px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .score-cap {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .score-status {
+      margin-top: 14px;
+      padding: 8px;
+      border-radius: 6px;
+      background: var(--yellow-bg);
+      color: var(--yellow);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .v-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    .btn-warn {
+      background: #fff;
+      color: var(--yellow);
+      border-color: #e0a93a;
+    }
+
+    /* Modal */
+    .modal-stage {
+      position: relative;
+    }
+
+    .blur-bg {
+      filter: blur(3px);
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 20, 20, .35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 560px;
+      max-width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+      overflow: hidden;
+    }
+
+    .modal-head {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--grey-line);
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .modal-body {
+      padding: 24px;
+      max-height: 460px;
+      overflow: auto;
+    }
+
+    .input {
+      width: 100%;
+      border: 1px solid var(--grey-border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 13.5px;
+    }
+
+    .input.ro {
+      background: var(--grey-bg);
+      color: var(--text-soft);
+    }
+
+    textarea.input {
+      resize: vertical;
+      min-height: 64px;
+      font-family: inherit;
+    }
+
+    .radio-row {
+      display: flex;
+      gap: 24px;
+    }
+
+    .radio {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+    }
+
+    .radio .rc {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--grey-border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radio .rc.on {
+      border-color: var(--blue);
+    }
+
+    .radio .rc.on::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .vsummary {
+      background: var(--grey-bg);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 8px;
+    }
+
+    .vsummary .vh {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      margin-bottom: 8px;
+    }
+
+    .vsummary li {
+      margin-left: 18px;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .gov-note {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .modal-foot {
+      padding: 16px 24px;
+      border-top: 1px solid var(--grey-line);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* Compare */
+    .compare {
+      display: flex;
+      gap: 20px;
+    }
+
+    .compare .ver {
+      flex: 1;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .compare .ver-head {
+      padding: 13px 18px;
+      background: var(--grey-header);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .compare .ver-head .vb {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .diff-outline {
+      border: 2px solid var(--blue) !important;
+      box-shadow: 0 0 0 3px rgba(15, 126, 168, .15);
+    }
+
+    .diff-section {
+      margin-top: 22px;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 18px 22px;
+    }
+
+    .diff-section .dh {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .diff-item {
+      padding: 9px 0;
+      font-size: 13.5px;
+      border-bottom: 1px solid var(--grey-line);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .diff-item:last-child {
+      border-bottom: none;
+    }
+
+    .diff-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    /* Compatibility additions */
+    .badge.unused {
+      background: var(--blue-bg);
+      color: var(--blue);
+    }
+
+    .badge.matched {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .badge.new {
+      background: var(--yellow-bg);
+      color: var(--yellow);
+    }
+
+    .badge.missing {
+      background: #fbe3e0;
+      color: var(--red);
+    }
+
+    .compat-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .compat-stat {
+      flex: 1;
+      min-width: 120px;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .compat-stat .cnum {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .compat-stat .clbl {
+      font-size: 12.5px;
+      color: var(--text-soft);
+    }
+
+    .compat-stat.g {
+      border-left: 4px solid var(--green);
+    }
+
+    .compat-stat.g .cnum {
+      color: var(--green);
+    }
+
+    .compat-stat.b {
+      border-left: 4px solid var(--blue);
+    }
+
+    .compat-stat.b .cnum {
+      color: var(--blue);
+    }
+
+    .compat-stat.y {
+      border-left: 4px solid #e0a93a;
+    }
+
+    .compat-stat.y .cnum {
+      color: var(--yellow);
+    }
+
+    .compat-stat.r {
+      border-left: 4px solid var(--red);
+    }
+
+    .compat-stat.r .cnum {
+      color: var(--red);
+    }
+
+    .reuse-card {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .reuse-block {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .reuse-block .rlbl {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: var(--text-light);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .reuse-block .rval {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .score-ring {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .score-ring .sr-num {
+      font-size: 24px;
+    }
+
+    .score-ring .sr-cap {
+      font-size: 10px;
+      font-weight: 500;
+      opacity: .9;
+    }
+
+    .score-ring.good {
+      background: var(--green);
+    }
+
+    .score-ring.warn {
+      background: #e0a93a;
+    }
+
+    .avail-list .ai {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      padding: 4px 0;
+    }
+
+    .avail-list .ai .ic {
+      color: var(--green);
+    }
+
+    .missing-list {
+      background: #fdeceb;
+      border: 1px solid #f3c9c4;
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+
+    .missing-list .ml-h {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      margin-bottom: 8px;
+    }
+
+    .missing-list .ml-i {
+      font-size: 13.5px;
+      color: #a33;
+      padding: 2px 0;
+    }
+
+    .missing-list .ml-note {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 8px;
+    }
+
+    .me-card {
+      border: 1px solid var(--grey-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .me-card.miss {
+      border-left: 4px solid var(--red);
+    }
+
+    .me-card.opt {
+      border-left: 4px solid #e0a93a;
+    }
+
+    .me-card .me-name {
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    .me-card .me-sev {
+      font-size: 11.5px;
+      margin: 4px 0 8px;
+    }
+
+    .me-card .me-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .me-card .me-actions .ma {
+      font-size: 11.5px;
+      padding: 4px 9px;
+      border: 1px solid var(--grey-border);
+      border-radius: 5px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .me-card .me-actions .ma:hover {
+      background: var(--grey-bg);
+    }
+
+    .fl-el.miss {
+      background: #fbe3e0 !important;
+      color: var(--red) !important;
+      border: 1.5px dashed var(--red) !important;
+    }
+
+    .fl-el.warn {
+      background: #fdf3d8 !important;
+      color: var(--yellow) !important;
+      border: 1.5px dashed #e0a93a !important;
+    }
+
+    .fl-el.valid {
+      background: #dde7ef !important;
+      color: var(--blue-dark) !important;
+      border: 1.5px solid var(--green) !important;
+    }
+
+    .decision-card {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 10px;
+      padding: 18px 22px;
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .decision-card .kw {
+      color: #cba6f7;
+      font-weight: 700;
+    }
+
+    .decision-card .arrow {
+      color: #a6e3a1;
+    }
+
+    .decision-card .res {
+      color: #89b4fa;
+    }
+
+    .panel-compat {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--grey-line);
+      background: #fff;
+    }
+
+    .panel-compat .pc-h {
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .panel-compat .pc-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      padding: 3px 0;
+    }
+
+    .view-issues {
+      color: var(--blue);
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 8px;
+      display: inline-block;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="screen-nav">
+    <button class="active" onclick="showScreen(1,this)">1 · Banner List</button>
+    <button onclick="showScreen(2,this)">2 · Guidelines Manager</button>
+    <button onclick="showScreen(3,this)">3 · Upload</button>
+    <button onclick="showScreen(4,this)">4 · Extract</button>
+    <button onclick="showScreen(5,this)">5 · Config Editor</button>
+    <button onclick="showScreen(6,this)">6 · Save Version</button>
+  </div>
+
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    </div>
+    <div class="urlbar">
+      <span class="nav-ico">‹ ›</span>
+      <div class="url" id="urlText"><b>app-frontend-promobuilder-uat.azurewebsites.net</b>/admin/clientMgmt/banners
+      </div>
+    </div>
+
+    <div class="app">
+      <!-- Top bar -->
+      <div class="topbar">
+        <div class="logo">
+          <div class="logo-mark">P</div>
+          <div class="logo-text">PROMO<span>BUILDER</span></div>
+        </div>
+        <div class="tenant">Canadian Tire <span class="chev">▸</span></div>
+        <div class="crumb-top"><span>Publications</span><b>Admin</b></div>
+        <div class="topbar-right">
+          <div class="item">▤ View Export Queue</div>
+          <div class="item bell">▢</div>
+          <div class="item user">◉ thaya.rajah@tc.tc</div>
+          <div class="item lang">EN <span>/ FR</span></div>
+        </div>
+      </div>
+
+      <div class="main">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="nav-item active"><span class="ico">▤</span> Client Management <span class="arr">▾</span></div>
+          <div class="nav-sub" id="navClients">Clients</div>
+          <div class="nav-sub active" id="navBanners">Banners</div>
+          <div class="nav-item"><span class="ico">👥</span> User Management <span class="arr">▸</span></div>
+          <div class="nav-item"><span class="ico">▦</span> Logs</div>
+          <div class="nav-item"><span class="ico">☑</span> Libraries <span class="arr">▸</span></div>
+          <div class="nav-item"><span class="ico">📖</span> Publication Types</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content" id="content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const screens = {};
+
+    /* ---------- SCREEN 1: Banner List ---------- */
+    screens[1] = `
+  <div class="page-crumb">Admin <span class="sep">›</span> Client Management <span class="sep">›</span> Banners</div>
+  <div class="toolbar">
+    <button class="btn"><span class="plus">+</span> Add New Banner</button>
+    <div class="search">🔍 <span>Search Banners</span></div>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Banner Name</th><th>Client Name</th><th>Categories</th><th>Groups</th><th>Users</th><th>Status</th><th>Actions</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>Canadian Tire</td><td>Canadian Tire Corporation</td><td>Automotive</td><td>RetailOps</td><td>Adil Hassa…</td>
+        <td><span class="badge active">Active</span></td>
+        <td>
+          <div class="kebab-wrap">
+            <span class="kebab">⋮</span>
+            <div class="dropdown">
+              <div class="opt">Edit Banner</div>
+              <div class="opt">Manage Users</div>
+              <div class="opt new" onclick="showScreen(2)">Guidelines Manager <span class="tag">NEW</span></div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Test Banner 1</td><td>Canadian Tire Corporation</td><td>Electronics</td><td>RetailOps</td><td>Adil Hassa…</td>
+        <td><span class="badge active">Active</span></td>
+        <td>
+          <div class="kebab-wrap"><span class="kebab">⋮</span></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+`;
+
+    /* ---------- SCREEN 2: Guidelines Manager Home ---------- */
+    screens[2] = `
+  <div class="breadcrumb-line">
+    <span>Admin</span> › <span>Client Management</span> › <span>Banners</span> › <span>Canadian Tire</span> › <span class="cur">Guidelines Manager</span>
+  </div>
+  <div class="page-crumb">Guidelines Manager <span class="mut">- Canadian Tire Banner</span></div>
+  <div class="toolbar">
+    <button class="btn btn-primary" onclick="showScreen(3)">⬆ Upload Stylesheet</button>
+    <button class="btn" onclick="showScreen(5)">📂 Open Existing Config</button>
+  </div>
+  <div class="card">
+    <div class="card-head">Recent Configurations</div>
+    <div class="card-body">
+      <div class="search sm" style="margin-bottom:16px">🔍 <span>Search configurations</span></div>
+      <table>
+        <thead><tr><th>Config Name</th><th>Status</th><th>Last Updated</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr><td>Regular_Config</td><td><span class="badge draft">Draft</span></td><td>May 30, 2026</td><td><span class="link" onclick="showScreen(5)">Edit</span></td></tr>
+          <tr><td>DollarDays_Config</td><td><span class="badge active">Active</span></td><td>May 28, 2026</td><td><span class="link" onclick="showScreen(5)">View</span></td></tr>
+          <tr><td>Holiday_Config</td><td><span class="badge active">Active</span></td><td>May 20, 2026</td><td><span class="link" onclick="showScreen(5)">View</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--
+  <div class="card">
+    <div class="card-head">Configuration Compatibility Center</div>
+    <div class="card-body">
+      <div class="reuse-card" style="margin-bottom:22px">
+        <div class="reuse-block" style="max-width:240px">
+          <div class="rlbl">Latest Stylesheet</div>
+          <div class="rval">DollarDays_2026.indd</div>
+          <div class="rlbl" style="margin-top:16px">Available Configurations</div>
+          <div class="avail-list">
+            <div class="ai"><span class="ic">✓</span> Regular_Config</div>
+            <div class="ai"><span class="ic">✓</span> DollarDays_Config</div>
+            <div class="ai"><span class="ic">✓</span> Holiday_Config</div>
+          </div>
+        </div>
+        <div class="reuse-block" style="border-left:1px solid var(--grey-line);padding-left:24px">
+          <div class="rlbl">Compatibility Score — Regular_Config v4</div>
+          <div style="display:flex;align-items:center;gap:18px;margin-top:10px">
+            <div class="score-ring good"><span class="sr-num">80%</span><span class="sr-cap">Match</span></div>
+            <div>
+              <div style="font-size:14px;margin-bottom:6px"><span style="color:var(--green);font-weight:700">32 / 42</span> elements matched</div>
+              <div style="font-size:14px;color:var(--red);font-weight:600">2 missing elements</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:18px">
+            <button class="btn btn-primary" onclick="showScreen(5)">Clone Config</button>
+          </div>
+        </div>
+      </div>
+
+      <table>
+        <thead><tr><th>Configuration</th><th>Compatibility</th><th>Matched</th><th>New</th><th>Missing</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Regular_Config</td>
+            <td><span style="color:var(--green);font-weight:700">80%</span></td>
+            <td>32/42</td>
+            <td><span style="color:var(--yellow);font-weight:600">6</span></td>
+            <td><span style="color:var(--red);font-weight:600">2</span></td>
+            <td><span class="badge matched">● Good</span></td>
+            <td><span class="link" onclick="showScreen(5)">Clone</span></td>
+          </tr>
+          <tr>
+            <td>DollarDays_Config</td>
+            <td><span style="color:var(--yellow);font-weight:700">68%</span></td>
+            <td>27/42</td>
+            <td><span style="color:var(--yellow);font-weight:600">8</span></td>
+            <td><span style="color:var(--red);font-weight:600">5</span></td>
+            <td><span class="badge new">● Partial</span></td>
+            <td><span class="link" onclick="showScreen(5)">Clone</span></td>
+          </tr>
+          <tr>
+            <td>Holiday_Config</td>
+            <td><span style="color:var(--red);font-weight:700">40%</span></td>
+            <td>17/42</td>
+            <td><span style="color:var(--yellow);font-weight:600">12</span></td>
+            <td><span style="color:var(--red);font-weight:600">11</span></td>
+            <td><span class="badge missing">● Low</span></td>
+            <td><span class="link" onclick="showScreen(5)">Clone</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+-->
+`;
+
+    /* ---------- SCREEN 3: Upload Stylesheet ---------- */
+    screens[3] = `
+  <div class="modal-stage">
+    <div id="upload-main-content">
+      <div class="breadcrumb-line">
+        <span>Admin</span> › <span>Client Management</span> › <span>Banners</span> › <span>Canadian Tire</span> › <span>Guidelines Manager</span> › <span class="cur">Upload Stylesheet</span>
+      </div>
+      <div class="page-crumb">Upload Stylesheet</div>
+      <div class="card" style="max-width:760px;margin:0 auto">
+        <div class="card-body">
+          <div class="upload-zone">
+            <div class="big">⬆</div>
+            <div class="t1">Upload INDD File</div>
+            <div class="t2">Drag file here or <span class="link">browse</span></div>
+            <div class="formats">Accepted formats: .INDD</div>
+          </div>
+          <div class="file-result">
+            <div class="file-meta"><div class="lbl">File Name</div><div class="val">SOB_Stylesheet.indd</div></div>
+            <div class="file-meta"><div class="lbl">File Size</div><div class="val">14.2 MB</div></div>
+            <div class="file-meta"><div class="lbl">Status</div><div class="val ok">✓ Uploaded Successfully</div></div>
+            <div class="file-meta"><div class="lbl">Elements Detected</div><div class="val">42</div></div>
+          </div>
+          <div class="progress"><div></div></div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-ghost" onclick="showScreen(2)">Cancel</button>
+            <button class="btn btn-primary" onclick="showScreen(5)">Create New Config</button>
+            <button class="btn" onclick="showUploadModal()">Update Existing Config</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ghosted overlay modal -->
+    <div id="upload-modal-overlay" class="modal-overlay hidden">
+      <div class="modal" style="width: 480px;">
+        <div class="modal-head">Update Existing Configuration</div>
+        <div class="modal-body">
+          <div class="field">
+            <label>Select Existing Config</label>
+            <select name="" id="modal-config-select" class="input">
+              <option value="" selected disabled>Choose one...</option>
+              <option value="Regular_Config">Regular_Config</option>
+              <option value="DollarDays_Config">DollarDays_Config</option>
+              <option value="Holiday_Config">Holiday_Config</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-ghost" onclick="hideUploadModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="showScreen(4)">Update Config</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+    /* ---------- SCREEN 4: Extract Elements ---------- */
+    screens[4] = `
+  <div class="breadcrumb-line">
+    <span>Admin</span> › <span>Client Management</span> › <span>Banners</span> › <span>Canadian Tire</span> › <span>Guidelines Manager</span> › <span class="cur">Extract Elements</span>
+  </div>
+  <div class="page-crumb">Extracted Elements</div>
+  <div class="reuse-block" style="margin-bottom:16px">
+    <div class="rlbl">Selected Config File</div>
+    <div class="rval">Regular_Config &nbsp;<span class="badge matched">✓</span></div>
+  </div>
+  <div class="compat-row" style="margin-bottom:18px">
+    <div class="compat-stat g"><div class="cnum">42</div><div class="clbl">Detected Elements</div></div>
+    <div class="compat-stat g"><div class="cnum">32</div><div class="clbl">Matched Elements</div></div>
+    <div class="compat-stat b"><div class="cnum">8</div><div class="clbl">Unused Elements</div></div>
+    <div class="compat-stat r"><div class="cnum">2</div><div class="clbl">Missing Elements</div></div>
+  </div>
+  <!-- 
+  <div class="summary-card">
+    <div class="seg"><div class="num" style="color:var(--green)">42</div><div class="cap">Matched</div></div>
+    <div class="seg"><div class="num" style="color:var(--yellow)">8</div><div class="cap">New</div></div>
+    <div class="seg"><div class="num" style="color:var(--red)">2</div><div class="cap">Missing</div></div>
+  </div>
+  -->
+  <div class="search sm" style="margin-bottom:16px;max-width:100%">🔍 <span>Search elements</span></div>
+  <div class="chips">
+    <div class="chip active">All</div><div class="chip">Matched</div><div class="chip">Unused</div><div class="chip">Missing</div>
+  </div>
+  <table>
+    <thead><tr><th>Element Name</th><th>Mapping Status</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>PromoPriceElement</td><td><span class="badge matched">✓ Matched</span></td><td>—</td></tr>
+      <tr><td>CopyElement</td><td><span class="badge matched">✓ Matched</span></td><td>—</td></tr>
+      <tr><td>ImageElement</td><td><span class="badge matched">✓ Matched</span></td><td>—</td></tr>
+      <tr><td>LogoElement</td><td><span class="badge matched">✓ Matched</span></span></td><td>—</td></tr>
+      <tr><td>PromoBubbleElement</td><td><span class="badge matched">✓ Matched</span></td><td>—</td></tr>
+      <tr><td>RegPriceElement</td><td><span class="badge unused">⚠ Unused</span></td><td><span class="remove">❌</span></td></tr>
+      <tr><td>SalePriceElement</td><td><span class="badge unused">⚠ Unused</span></td><td><span class="remove">❌</span></td></tr>
+      <tr><td>MemberPriceElement</td><td><span class="badge missing">? Missing</span></td><td>—</td></tr>
+      <tr><td>Non-MemberPriceElement</td><td><span class="badge missing">? Missing</span></td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:24px">
+    <button class="btn" onclick="showScreen(4)">Cancel</button>
+    <button class="btn btn-primary" onclick="showScreen(5)">Continue → Configure Rules</button>
+  </div>
+`;
+
+    /* ---------- SCREEN 5: Config Editor ---------- */
+    const flyer = (extraClass = '') => `
+  <div class="flyer">
+    <div class="fl-el fl-image ${extraClass}">Image</div>
+    <div class="fl-el fl-logo">Logo</div>
+    <div class="fl-el fl-copy"><span>Copy Text</span><span style="font-weight:400;font-size:11px">Lorem ipsum promotional copy</span></div>
+    <div class="fl-el fl-price ${extraClass ? '' : ''}">$29.99</div>
+  </div>`;
+
+    screens[5] = `
+  <div class="breadcrumb-line">
+    <span>Admin</span> › <span>Client Management</span> › <span>Banners</span> › <span>Canadian Tire</span> › <span class="cur">Config Editor</span>
+  </div>
+  <div class="page-crumb">Config Editor <span class="mut">- Reg_Config (Draft)</span></div>
+  <div class="editor">
+    <!-- LEFT -->
+    <div class="panel panel-l">
+      <div class="panel-compat">
+        <div class="pc-h">Compatibility Status</div>
+        <div class="pc-row"><span style="color:var(--green)">✓</span> 42 Matched</div>
+        <div class="pc-row"><span style="color:var(--yellow)">⚠</span> 8 Unused Elements</div>
+        <div class="pc-row"><span style="color:var(--red)">?</span> 2 Missing Elements</div>
+      </div>
+      <div class="panel-title">Configuration Navigator</div>
+      <div class="nav-group">
+        <div class="grp-lbl">Elements</div>
+        <div class="leaf">CopyElement ✓</div>
+        <div class="leaf">ImageElement ✓</div>
+        <div class="leaf">LogoElement ✓</div>
+        <div class="leaf sel">MemberPriceElement ⚠</div>
+        <div class="leaf">NonMemberPriceElement ⚠</div>
+      </div>
+      <div class="nav-group">
+        <div class="grp-lbl">Slot Types</div>
+        <div class="leaf sel">Feature</div>
+        <div class="leaf">Sub-feature</div>
+        <div class="leaf">Traffic</div>
+      </div>
+    </div>
+    <!-- CENTER -->
+    <div class="panel panel-c">
+      <div class="panel-title">HTML Preview <span style="font-weight:400;font-size:11px;color:var(--text-light);margin-left:8px">● Green = Valid &nbsp; ● Yellow = Warning &nbsp; ● Red = Missing</span></div>
+      <div class="preview-body">
+        <div class="flyer">
+          <div class="fl-el fl-image valid">ImageElement ✓</div>
+          <div class="fl-el fl-logo valid">LogoElement ✓</div>
+          <div class="fl-el fl-copy valid"><span>CopyElement ✓</span><span style="font-weight:400;font-size:11px">Lorem ipsum promotional copy</span></div>
+        </div>
+      </div>
+      <div class="validation-bar" style="background:var(--yellow-bg);color:var(--yellow)">⚠ 2 missing elements must be resolved before activation</div>
+    </div>
+    <!-- RIGHT -->
+    <div class="panel panel-r">
+      <div class="panel-title">Element Rules</div>
+      <div class="rules-body">
+        <div class="selected-el">Selected: PriceElement</div>
+        <div class="field"><label>Scale</label><div class="selectbox">100% <span class="cv">▾</span></div></div>
+        <div class="field"><label>Alignment</label><div class="selectbox">Bottom Right <span class="cv">▾</span></div></div>
+        <div class="field">
+          <label>Collision Rules</label>
+          <div class="chk-row"><span class="chk on">✓</span> Image</div>
+          <div class="chk-row"><span class="chk on">✓</span> Copy</div>
+          <div class="chk-row"><span class="chk"></span> Logo</div>
+        </div>
+        <div class="field">
+          <label>YAML Configuration</label>
+          <div class="yaml"><span class="k">elements</span>:<br>&nbsp;&nbsp;<span class="k">price</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">alignment</span>: <span class="v">bottom_right</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">scale</span>: <span class="n">100</span></div>
+        </div>
+        <div class="field">
+          <label>Missing &amp; New Elements</label>
+          <div class="me-card miss">
+            <div class="me-name">MemberPriceElement</div>
+            <div class="me-sev"><span class="badge missing">Missing</span></div>
+            <div class="me-actions"><span class="ma">Map Existing</span><span class="ma">Create New Rule</span></div>
+          </div>
+          <div class="me-card miss">
+            <div class="me-name">NonMemberPriceElement</div>
+            <div class="me-sev"><span class="badge missing">Missing</span></div>
+            <div class="me-actions"><span class="ma">Map Existing</span><span class="ma">Create New Rule</span></div>
+          </div>
+          <!--
+          <div class="me-card opt">
+            <div class="me-name">LogoElement</div>
+            <div class="me-sev"><span class="badge new">Optional / New</span></div>
+            <div class="me-actions"><span class="ma">Create New Rule</span><span class="ma">Ignore</span></div>
+          </div>
+          -->
+        </div>
+      </div>
+      <div class="rules-foot">
+        <button class="btn btn-primary" style="flex:1;justify-content:center" onclick="showScreen(6)">Save Config</button>
+        <button class="btn" style="flex:1;justify-content:center">Reset</button>
+      </div>
+    </div>
+  </div>
+`;
+
+    /* ---------- SCREEN 7: Save & Version (modal over editor) ---------- */
+    screens[6] = `
+  <div class="modal-stage">
+    <div class="blur-bg">
+      <div class="breadcrumb-line"><span>Admin</span> › <span>Client Management</span> › <span>Banners</span> › <span>Canadian Tire</span> › <span class="cur">Config Editor</span></div>
+      <div class="page-crumb">Config Editor</div>
+      <div class="editor"><div class="panel panel-l"></div><div class="panel panel-c"><div class="preview-body">${flyer()}</div></div><div class="panel panel-r"></div></div>
+    </div>
+    <div class="modal-overlay">
+      <div class="modal">
+        <div class="modal-head">Save Configuration</div>
+        <div class="modal-body">
+          <div class="field"><label>Configuration Name</label><input class="input" value="Regular_Config"></div>
+          <div class="field"><label>Version</label><input class="input ro" value="v5 (auto-generated)" readonly></div>
+          <div class="reuse-card" style="margin-bottom:16px">
+            <div class="reuse-block"><div class="rlbl">Reuse Source</div><div class="rval">Regular_Config</div></div>
+          </div>
+          <div class="field">
+            <label>Status</label>
+            <div class="radio-row">
+              <div class="radio"><span class="rc on"></span> Draft</div>
+              <div class="radio"><span class="rc"></span> Active</div>
+            </div>
+          </div>
+          <div class="field"><label>Comments</label><textarea class="input">Cloned from Regular_Config. Updated traffic price alignment and collision rules; added LogoElement rule.</textarea></div>
+          <div class="vsummary">
+            <div class="vh">Version Summary — Changes</div>
+            <ul>
+              <li>Updated price alignment</li>
+              <li>Adjusted copy spacing</li>
+              <li>Collision rules modified</li>
+            </ul>
+          </div>
+          <div class="gov-note">ⓘ Previous versions remain preserved and available for comparison.</div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-ghost" onclick="showScreen(5)">Cancel</button>
+          <button class="btn btn-primary" onclick="showScreen(1)">Save as New Version</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+    const urls = {
+      1: '/admin/clientMgmt/banners',
+      2: '/admin/clientMgmt/banners/canadian-tire/guidelines',
+      3: '/admin/guidelines/upload-stylesheet',
+      4: '/admin/guidelines/extract-elements',
+      5: '/admin/guidelines/config-editor',
+      6: '/admin/guidelines/config-editor#save',
+    };
+
+    function showScreen(n, btn) {
+      document.getElementById('content').innerHTML = screens[n];
+      document.getElementById('urlText').innerHTML = '<b>app-frontend-promobuilder-uat.azurewebsites.net</b>' + urls[n];
+      // nav highlight
+      document.getElementById('navClients').classList.remove('active');
+      document.getElementById('navBanners').classList.add('active');
+      // top buttons
+      const tabs = document.querySelectorAll('.screen-nav button');
+      tabs.forEach((b, i) => b.classList.toggle('active', i === n - 1));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showUploadModal() {
+      const mainContent = document.getElementById('upload-main-content');
+      const modalOverlay = document.getElementById('upload-modal-overlay');
+      if (mainContent && modalOverlay) {
+        mainContent.classList.add('blur-bg');
+        modalOverlay.classList.remove('hidden');
+      }
+    }
+
+    function hideUploadModal() {
+      const mainContent = document.getElementById('upload-main-content');
+      const modalOverlay = document.getElementById('upload-modal-overlay');
+      if (mainContent && modalOverlay) {
+        mainContent.classList.remove('blur-bg');
+        modalOverlay.classList.add('hidden');
+      }
+    }
+
+    showScreen(1);
+  </script>
+</body>
+
+</html>
